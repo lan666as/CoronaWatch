@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00E1F47B-F57F-4F07-9C11-DE8D62C8E4E3}</ProjectGuid>
+    <ProjectGuid>{A02DF46D-D0AC-4C26-964A-92617276360C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoronaWatchLibrary</RootNamespace>
