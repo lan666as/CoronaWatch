@@ -7,20 +7,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaWatch", "CoronaWatch\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaWatchLibrary", "CoronaWatchLibrary\CoronaWatchLibrary.csproj", "{A02DF46D-D0AC-4C26-964A-92617276360C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CoronaWatchSetup", "CoronaWatchSetup\CoronaWatchSetup.vdproj", "{ADAE59D2-6A3E-4FDB-AF53-FDF1FFF3A15F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382FD028-5B23-4A9F-AFC4-9437888C2B5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A02DF46D-D0AC-4C26-964A-92617276360C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A02DF46D-D0AC-4C26-964A-92617276360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A02DF46D-D0AC-4C26-964A-92617276360C}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{A02DF46D-D0AC-4C26-964A-92617276360C}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{A02DF46D-D0AC-4C26-964A-92617276360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A02DF46D-D0AC-4C26-964A-92617276360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADAE59D2-6A3E-4FDB-AF53-FDF1FFF3A15F}.Debug|Any CPU.ActiveCfg = Debug
+		{ADAE59D2-6A3E-4FDB-AF53-FDF1FFF3A15F}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
