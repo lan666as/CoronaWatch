@@ -1,5 +1,7 @@
 # CoronaWatch
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://dev.azure.com/ahmadzidan/CoronaWatch/_apis/build/status/.NET%20Desktop?branchName=master)](https://dev.azure.com/ahmadzidan/CoronaWatch/_build/latest?definitionId=1&branchName=master)
+
 A C# Application Project to track and watch Covid-19 cases worldwide, done to fulfill OOP Course final team assignments. Made with .NET Framework 4.8 and WPF.
 
 # Team Members
