@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaWatch", "CoronaWatch\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaWatchLibrary", "CoronaWatchLibrary\CoronaWatchLibrary.csproj", "{A02DF46D-D0AC-4C26-964A-92617276360C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CoronaWatchSetup", "CoronaWatchSetup\CoronaWatchSetup.vdproj", "{A33EF9B9-156D-4E0E-A57C-B6FB3E6C1383}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{A02DF46D-D0AC-4C26-964A-92617276360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A02DF46D-D0AC-4C26-964A-92617276360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A02DF46D-D0AC-4C26-964A-92617276360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33EF9B9-156D-4E0E-A57C-B6FB3E6C1383}.Debug|Any CPU.ActiveCfg = Debug
+		{A33EF9B9-156D-4E0E-A57C-B6FB3E6C1383}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
