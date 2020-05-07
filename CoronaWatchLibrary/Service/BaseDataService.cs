@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CoronaWatchLibrary
 {
-    public abstract class BaseDataService
+    public class BaseDataService
     {
-        public abstract void FetchTimeSeries();
+        //public abstract void FetchTimeSeries();
         //public abstract Report FetchReports();
     }
 }
