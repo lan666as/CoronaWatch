@@ -1,3 +1,5 @@
+<img src="./CoronaWatchUI/Resources/CoronaWatchLogo.png" alt="CoronaWatch Logo" style="display: block; margin: auto; width: 100%; max-width: 300px; height: auto;"/>
+
 # CoronaWatch
 
 A C# Application Project to track and watch Covid-19 cases worldwide, done to fulfill OOP Course final team assignments. Made with .NET Framework 4.8 and WPF.
