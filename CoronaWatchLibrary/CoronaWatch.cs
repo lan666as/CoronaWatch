@@ -11,7 +11,7 @@ namespace CoronaWatchLibrary
         public Region World = new Region("World", Region.EnumLevel.World, new Coordinate());
         public CoronaWatch()
         {
-            World.Report = JHUDataService.FetchReports();
+            World.Report = JHUDataService.GetReports();
         }
     }
 }

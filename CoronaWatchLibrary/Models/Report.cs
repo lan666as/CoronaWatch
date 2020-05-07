@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace CoronaWatchLibrary
     {
         public DateTime LastUpdate { get; set; }
         public Statistic Statistic { get; set; }
+        public string Source { get; set; }
 
         public Report()
         {
@@ -19,10 +21,21 @@ namespace CoronaWatchLibrary
         {
             this.Statistic = statistic;
         }
+        public Report(Statistic statistic, string source)
+        {
+            this.Statistic = statistic;
+            this.Source = source;
+        }
         public Report(DateTime date, Statistic statistic)
         {
             this.LastUpdate = date;
             this.Statistic = statistic;
+        }
+        public Report(DateTime date, Statistic statistic, string source)
+        {
+            this.LastUpdate = date;
+            this.Statistic = statistic;
+            this.Source = source;
         }
     }
 }

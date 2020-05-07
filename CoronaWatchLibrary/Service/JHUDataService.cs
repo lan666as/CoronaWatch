@@ -12,8 +12,17 @@ namespace CoronaWatchLibrary
     public class JHUDataService : BaseDataService
     {
         private static readonly string API = "https://api.covid19api.com/";
+        private static Report Report;
 
-        public static Report FetchReports()
+        public static Report GetReports()
+        {
+            if (Report == null)
+            {
+                Report = FetchReports();
+            }
+            return Report;
+        }
+        private static Report FetchReports()
         {
             WebRequest request = WebRequest.Create(API + "summary");
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -33,12 +42,12 @@ namespace CoronaWatchLibrary
         private static Report ParseWorldReports(JObject jObject)
         {
             Statistic statistic = new Statistic(confirmed: (int)jObject["TotalConfirmed"], recovered: (int)jObject["TotalRecovered"], death: (int)jObject["TotalDeaths"]);
-            Report report = new Report(statistic);
+            Report report = new Report(statistic, "JHU");
             return report;
         }
 
 
-        public override void FetchTimeSeries()
+        public static void FetchTimeSeries()
         {
             throw new NotImplementedException();
         }

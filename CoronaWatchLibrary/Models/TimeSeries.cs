@@ -12,17 +12,25 @@ namespace CoronaWatchLibrary
     {
         public List<Statistic> StatisticSeries { get; set; }
         public List<DateTime> DateSeries { get; set; }
+        public string Source { get; set; }
 
-        TimeSeries()
+        public TimeSeries()
         {
-            StatisticSeries = new List<Statistic>();
-            DateSeries = new List<DateTime>();
+            this.StatisticSeries = new List<Statistic>();
+            this.DateSeries = new List<DateTime>();
         }
-        TimeSeries(List<Statistic> statistic, List<DateTime> date)
+        public TimeSeries(List<Statistic> statistic, List<DateTime> date)
         {
-            StatisticSeries = statistic;
-            DateSeries = date;
+            this.StatisticSeries = statistic;
+            this.DateSeries = date;
         }
+        public TimeSeries(List<Statistic> statistic, List<DateTime> date, string source)
+        {
+            this.StatisticSeries = statistic;
+            this.DateSeries = date;
+            this.Source = source;
+        }
+
 
         public DateTime LastUpdate()
         {
