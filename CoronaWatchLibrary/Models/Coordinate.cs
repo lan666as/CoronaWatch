@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoronaWatchLibrary.Model
+namespace CoronaWatchLibrary
 {
     public class Coordinate
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
-        Coordinate()
+        public Coordinate()
         {
             this.Latitude = 0;
             this.Longitude = 0;
         }
 
-        Coordinate(double latitude, double longitude)
+        public Coordinate(double latitude, double longitude)
         {
             this.Latitude = latitude;
             this.Longitude = longitude;

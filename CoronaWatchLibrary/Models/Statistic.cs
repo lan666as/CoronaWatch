@@ -4,33 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoronaWatchLibrary.Model
+namespace CoronaWatchLibrary
 {
     public class Statistic
     {
         public int ConfirmedCases { get; set; }
         public int RecoveredCases { get; set; }
         public int DeathCases { get; set; }
+        public int ActiveCases { get; set; }
 
-        Statistic()
+        public Statistic()
         {
             this.ConfirmedCases = 0;
             this.RecoveredCases = 0;
             this.DeathCases = 0;
+            this.ActiveCases = 0;
         }
 
-        Statistic(int confirmed, int recovered, int death)
+        public Statistic(int confirmed, int recovered, int death)
         {
             this.ConfirmedCases = confirmed;
             this.RecoveredCases = recovered;
             this.DeathCases = death;
-        }
-        public int ActiveCases
-        {
-            get
-            {
-                return this.ConfirmedCases - this.DeathCases - this.RecoveredCases;
-            }
+            this.ActiveCases = this.ConfirmedCases - this.DeathCases - this.RecoveredCases;
         }
     }
 }
