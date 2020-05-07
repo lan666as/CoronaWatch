@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CoronaWatch.Properties
+namespace CoronaWatchUI.Properties
 {
 
 
