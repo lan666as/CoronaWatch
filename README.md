@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+<a href="https://dev.azure.com/ahmadzidan/_git/CoronaWatch?path=%2FLICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
 <a href="https://dev.azure.com/ahmadzidan/CoronaWatch/_build/latest?definitionId=1&branchName=master"><img src="https://dev.azure.com/ahmadzidan/CoronaWatch/_apis/build/status/dotnet%20Desktop?branchName=master" alt="Build Status"></a>
 </p>
 
