@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CoronaWatchLibrary;
 
-namespace CoronaWatch
+namespace CoronaWatchUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +24,10 @@ namespace CoronaWatch
         public MainWindow()
         {
             InitializeComponent();
+
+            CoronaWatch corona = new CoronaWatch();
+
+            this.DataContext = corona.World.Report.Statistic;
         }
     }
 }
