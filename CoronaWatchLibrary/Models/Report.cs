@@ -15,7 +15,7 @@ namespace CoronaWatchLibrary
 
         public Report()
         {
-
+            
         }
         public Report(Statistic statistic)
         {
