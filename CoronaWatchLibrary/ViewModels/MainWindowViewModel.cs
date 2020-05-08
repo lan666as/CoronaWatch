@@ -6,8 +6,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MaterialDesignThemes.Wpf;
-using MaterialDesignThemes.Wpf.Transitions;
+
 
 namespace CoronaWatchLibrary.ViewModels
 {
@@ -59,10 +58,7 @@ namespace CoronaWatchLibrary.ViewModels
         
         private void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
