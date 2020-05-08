@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoronaWatchLibrary;
+using CoronaWatchLibrary.ViewModels;
 
 namespace CoronaWatchUI
 {
@@ -23,11 +24,11 @@ namespace CoronaWatchUI
     {
         public MainWindow()
         {
+            CoronaWatchViewModel region = new CoronaWatchViewModel();
+            region.Regions.Sort((x, y) => x.Name.CompareTo(y.Name));
+            DataContext = region;
             InitializeComponent();
-
-            CoronaWatch corona = new CoronaWatch();
-
-            this.DataContext = corona.World.Report.Statistic;
+            
         }
     }
 }

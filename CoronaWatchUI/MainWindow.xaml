@@ -6,6 +6,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:CoronaWatchUI"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vms="clr-namespace:CoronaWatchLibrary.ViewModels;assembly=CoronaWatchLibrary"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
@@ -43,16 +44,17 @@
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
 
                     <ListBox 
-                        x:Name="DemoItemsListBox" 
+                        x:Name="CountriesListboxx" 
                         Margin="0 16 0 16"
                         SelectedIndex="0"
+                        MaxWidth="220"
                         SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding DemoItems}">
+                        ItemsSource="{Binding Regions}">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:DemoItem">
+                            <DataTemplate>
                                 <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
