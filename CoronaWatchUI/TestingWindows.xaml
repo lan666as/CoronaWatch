@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         Title="CoronaWatch"
         MinWidth="1100"
-        MinHeight="768" Icon="Favicon.png" WindowStartupLocation="CenterScreen">
+        MinHeight="768" Icon="Assets/Images/Favicon.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="12, 12, 0, 0">
             <TextBlock Text="Covid-19 Cases by Country" FontSize="24" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>

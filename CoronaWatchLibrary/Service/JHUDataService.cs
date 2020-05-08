@@ -66,7 +66,7 @@ namespace CoronaWatchLibrary
             foreach (JsonObject json in array)
             {
                 Region region = new Region(json["Country"].ToString(), json["ISO2"].ToString(), Region.EnumLevel.Province, new Coordinate(), "World");
-                region.slug = json["Slug"].ToString();
+                region.Slug = json["Slug"].ToString();
                 regions.Add(region);
             }
             return regions;
@@ -92,6 +92,31 @@ namespace CoronaWatchLibrary
                 reports.Add(report);
             }
             return reports;
+        }
+
+        public static List<Region> FetchSummary()
+        {
+            List<Region> regions = new List<Region>();
+            var client = new RestClient(API + "summary");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            var json = SimpleJson.DeserializeObject(response.Content);
+            JObject obj = JObject.Parse(json.ToString());
+            JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
+
+            foreach (dynamic jsonObject in array)
+            {
+                Statistic statistic = new Statistic(Convert.ToInt32(jsonObject["TotalConfirmed"].ToString()), Convert.ToInt32(jsonObject["TotalRecovered"].ToString()), Convert.ToInt32(jsonObject["TotalDeaths"].ToString()));
+                statistic.StatisticID = jsonObject["CountryCode"].ToString();
+                DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                Report report = new Report(date, statistic);
+
+                Region region = new Region(jsonObject["Country"], Region.EnumLevel.Country, jsonObject["Slug"], jsonObject["CountryCode"]);
+                region.Report = report;
+                regions.Add(region);
+            }
+            return regions;
         }
     }
 }

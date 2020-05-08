@@ -18,7 +18,7 @@ namespace CoronaWatchLibrary
         public string ParentName { get; protected set; }
         public Coordinate Location { get; set; }
         public string ISOCode { get; set; }
-        public string slug {get; set;}
+        public string Slug {get; set;}
         public EnumLevel Level { get; set; }
         public List<Region> Children { get; set; }
 
@@ -28,6 +28,13 @@ namespace CoronaWatchLibrary
         public Region()
         {
 
+        }
+        public Region(string name, EnumLevel level, string slug, string isoCode)
+        {
+            this.Name = name;
+            this.Level = level;
+            this.Slug = slug;
+            this.ISOCode = isoCode;
         }
         public Region(string name, EnumLevel level, Coordinate location)
         {
