@@ -6,7 +6,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:CoronaWatchUI"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:vms="clr-namespace:CoronaWatchLibrary.ViewModels;assembly=CoronaWatchLibrary"
+        xmlns:vms="clr-namespace:CoronaWatchUI.Domain;assembly=CoronaWatchUI"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
@@ -49,7 +49,7 @@
                         SelectedIndex="0"
                         MaxWidth="220"
                         SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding Regions}">
+                        ItemsSource="{Binding MenuItems}">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>

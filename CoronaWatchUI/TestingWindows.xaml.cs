@@ -22,7 +22,7 @@ namespace CoronaWatchUI
     {
         public TestingWindows()
         {
-            CoronaWatchViewModel region = new CoronaWatchViewModel();
+            MainWindowViewModel region = new MainWindowViewModel();
             InitializeComponent();
             DataContext = region;
         }
