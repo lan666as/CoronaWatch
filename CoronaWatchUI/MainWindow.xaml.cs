@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoronaWatchLibrary;
+using CoronaWatchUI.Domain;
+using MaterialDesignThemes.Wpf;
 
 namespace CoronaWatchUI
 {
@@ -21,13 +24,30 @@ namespace CoronaWatchUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Snackbar Snackbar;
         public MainWindow()
         {
+            /*
+            MainWindowViewModel region = new MainWindowViewModel();
+            region.Regions.Sort((x, y) => x.Name.CompareTo(y.Name));
+            DataContext = region;
+            InitializeComponent();
+            */
+
             InitializeComponent();
 
-            CoronaWatch corona = new CoronaWatch();
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(2500);
+            }).ContinueWith(t =>
+            {
+                MainSnackbar.MessageQueue.Enqueue("Welcome to CoronaWatch");
+            }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            this.DataContext = corona.World.Report.Statistic;
+            DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
+
+            Snackbar = this.MainSnackbar;
+
         }
     }
 }

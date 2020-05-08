@@ -6,6 +6,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:CoronaWatchUI"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vms="clr-namespace:CoronaWatchUI.Domain;assembly=CoronaWatchUI"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
@@ -16,7 +17,7 @@
         mc:Ignorable="d"
         Title="CoronaWatch"
         MinWidth="1100"
-        MinHeight="768" Icon="Favicon.png" WindowStartupLocation="CenterScreen">
+        MinHeight="768" WindowStartupLocation="CenterScreen" Icon="Assets/Images/Favicon.png">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -43,16 +44,17 @@
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
 
                     <ListBox 
-                        x:Name="DemoItemsListBox" 
+                        x:Name="CountriesListbox" 
                         Margin="0 16 0 16"
                         SelectedIndex="0"
+                        MaxWidth="220"
                         SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding DemoItems}">
+                        ItemsSource="{Binding MenuItems}">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:DemoItem">
+                            <DataTemplate>
                                 <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -86,7 +88,11 @@
                                 <Button Content="Goodbye"/>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">CoronaWatch</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="22">
+                            CoronaWatch
+                        </TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>

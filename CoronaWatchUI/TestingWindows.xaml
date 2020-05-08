@@ -1,0 +1,39 @@
+﻿<Window x:Class="CoronaWatchUI.TestingWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:CoronaWatchUI"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="CoronaWatch"
+        MinWidth="1100"
+        MinHeight="768" Icon="Assets/Images/Favicon.png" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Margin="12, 12, 0, 0">
+            <TextBlock Text="Covid-19 Cases by Country" FontSize="24" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+            <TextBox Text="{Binding Path=SelectedRegionIndex, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Country Index" Width="100" HorizontalAlignment="Left"
+                     materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <TextBox Text="{Binding Path=SelectedRegion.Name}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Country Name" Width="100" HorizontalAlignment="Left" IsReadOnly="True"/>
+            <TextBlock Margin="0, 12, 0, 0" Text="Report" FontSize="20" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+            <TextBox Text="{Binding Path=SelectedRegionReport.Statistic.ConfirmedCases}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Total Confirmed" Width="100" HorizontalAlignment="Left" IsReadOnly="True"/>
+            <TextBox Text="{Binding Path=SelectedRegionReport.Statistic.RecoveredCases}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Total Recovered" Width="100" HorizontalAlignment="Left" IsReadOnly="True"/>
+            <TextBox Text="{Binding Path=SelectedRegionReport.Statistic.DeathCases}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Total Deaths" Width="100" HorizontalAlignment="Left" IsReadOnly="True"/>
+            <TextBox Text="{Binding Path=Reports[12].Statistic.ConfirmedCases}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Total Deaths" Width="100" HorizontalAlignment="Left" IsReadOnly="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

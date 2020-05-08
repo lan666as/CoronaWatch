@@ -8,6 +8,8 @@ namespace CoronaWatchLibrary
 {
     public class Statistic
     {
+        // Added StatisticID for DB purpose
+        public string StatisticID { get; set; }
         public int ConfirmedCases { get; set; }
         public int RecoveredCases { get; set; }
         public int DeathCases { get; set; }
