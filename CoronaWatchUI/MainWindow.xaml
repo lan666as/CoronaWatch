@@ -17,7 +17,7 @@
         mc:Ignorable="d"
         Title="CoronaWatch"
         MinWidth="1100"
-        MinHeight="768" Icon="Favicon.png" WindowStartupLocation="CenterScreen">
+        MinHeight="768" WindowStartupLocation="CenterScreen" Icon="Assets/Images/Favicon.png">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -44,7 +44,7 @@
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
 
                     <ListBox 
-                        x:Name="CountriesListboxx" 
+                        x:Name="CountriesListbox" 
                         Margin="0 16 0 16"
                         SelectedIndex="0"
                         MaxWidth="220"

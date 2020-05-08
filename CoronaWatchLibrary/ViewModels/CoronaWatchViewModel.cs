@@ -22,7 +22,7 @@ namespace CoronaWatchLibrary.ViewModels
             get { return selectedRegionIndex; }
             set
             {
-                if (0 <= value && value <= Regions.Count())
+                if (0 <= value && value < Regions.Count())
                 {
                     selectedRegionIndex = Convert.ToInt32(value);
                     OnPropertyChanged("SelectedRegionIndex");
