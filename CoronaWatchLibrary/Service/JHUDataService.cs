@@ -102,6 +102,32 @@ namespace CoronaWatchLibrary
             return reports;
         }
 
+        public static TimeSeries FetchTimeSeriesByRegion(Region region)
+        {
+            if(region.TimeSeries != null)
+            {
+                return region.TimeSeries;
+            }
+            var client = new RestClient(API+ "/dayone/country/"+region.Slug)
+            {
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            JsonArray array = (JsonArray)SimpleJson.DeserializeObject(response.Content);
+
+            TimeSeries timeSeries = new TimeSeries();
+
+            foreach (dynamic json in array)
+            {
+                Statistic statistic = new Statistic((int)json["Confirmed"], (int)json["Recovered"], (int)json["Deaths"], (int)json["Active"]);
+                DateTime date = DateTime.Parse(json["Date"], null, System.Globalization.DateTimeStyles.RoundtripKind);
+                timeSeries.Add(statistic, date);
+            }
+
+            return timeSeries;
+        }
+
         public static List<Region> FetchSummary()
         {
             List<Region> regions = new List<Region>();

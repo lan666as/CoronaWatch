@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:CoronaWatchUI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <ScrollViewer>
+        <StackPanel Margin="100,0,100,0" VerticalAlignment="Center">
+            <Label Content="Welcome to CoronaWatch" FontSize="30" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoronaWatch.cs" />
     <Compile Include="Models\DataCorona.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\Region.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="SocialMedia\ISocialMedia.cs" />
     <Compile Include="SocialMedia\Twitter.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
