@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4e33cb4f3b54f869455374689911e3e" Name="Diagram1">
+        <EntityTypeShape EntityType="CoronaWatchDBModel.RegionDB" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="CoronaWatchDBModel.ReportDB" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="CoronaWatchDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="CoronaWatchDBModel.FK_ReportDB_RegionDB" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
