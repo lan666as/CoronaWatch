@@ -25,6 +25,7 @@ namespace Testing
         {
             #region Testing Aldo
             Console.WriteLine(Regex.Match(System.DateTime.UtcNow.Date.ToString(), @"\d{2}/\d{2}/\d{4}").Value);
+            Console.WriteLine("Updating DB...");
                 try
                 {
                     DatabaseDataService.UpdateDatabase();
