@@ -70,9 +70,9 @@ namespace CoronaWatchUI.Domain
             return new ObservableCollection<MenuItem>
             {
                 new MenuItem("Home", new Home()),
-                new MenuItem("World", new World{ DataContext = new WorldGridsViewModel() }),
-                new MenuItem("Chart", new CoronaChart{ DataContext = new CoronaChartViewModel()}),
-                new MenuItem("Map", new CoronaMap()),
+                //new MenuItem("World", new World{ DataContext = new WorldGridsViewModel() }),
+                //new MenuItem("Chart", new CoronaChart{ DataContext = new CoronaChartViewModel()}),
+                new MenuItem("Map", new CoronaMap() { DataContext = new CoronaMapViewModel() } ),
                 new MenuItem("About", new About())
             };
         }
