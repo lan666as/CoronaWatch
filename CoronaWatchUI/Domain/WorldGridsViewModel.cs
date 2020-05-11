@@ -1,4 +1,5 @@
 ﻿using CoronaWatchLibrary;
+using CoronaWatchLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,7 +60,7 @@ namespace CoronaWatchUI.Domain
 
         private static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
-            List<Region> regions = JHUDataService.FetchSummary();
+            List<Region> regions = DatabaseDataService.FetchDatabase();
             ObservableCollection<RegionGridsViewModel> regionGrids = new ObservableCollection<RegionGridsViewModel>();
 
             foreach(Region reg in regions)

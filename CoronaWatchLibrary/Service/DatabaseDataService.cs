@@ -69,7 +69,6 @@ namespace CoronaWatchLibrary.Service
 
                 // Updating Region List, if exist
                 InitializeDatabase();
-                Console.WriteLine("Database Initialized");
 
                 // Check if the current data for ReportDB is exist. Note that ReportDB is equivalent to Report.
                 // Different Name used to avoid confusion and ambiguity
@@ -113,6 +112,38 @@ namespace CoronaWatchLibrary.Service
                     MessageBox.Show(e.Message, "Error");
             }
             
+        }
+
+        /// <summary>
+        /// Get latest data available on Database.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Region> FetchDatabase()
+        {
+            List<Region> regions = new List<Region>();
+            using (CoronaWatchDBEntities context = new CoronaWatchDBEntities())
+            {
+                DateTime currentDate = System.DateTime.UtcNow.Date;
+                DateTime latestDateOnDB = Convert.ToDateTime(context.ReportDBs.Max(r => r.Date)).Date;
+                List<RegionDB> regionDBs = context.RegionDBs.ToList();
+                List<ReportDB> reportDBs = context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == latestDateOnDB).ToList();
+
+                foreach (RegionDB regionDB in regionDBs)
+                {
+                    ReportDB reportDB = reportDBs.Where(r => r.ISOCode == regionDB.ISOCode).FirstOrDefault();
+                    Statistic statistic = new Statistic((int)reportDB.Confirmed, (int)reportDB.Recovered, (int)reportDB.Death)
+                    {
+                        StatisticID = reportDB.ISOCode
+                    };
+                    Report report = new Report(Convert.ToDateTime(reportDB.Date).Date, statistic);
+                    Region region = new Region(regionDB.Name, Region.EnumLevel.Country, regionDB.Slug, regionDB.ISOCode)
+                    {
+                        Report = report
+                    };
+                    regions.Add(region);
+                }
+            }
+            return regions;
         }
     }
 }

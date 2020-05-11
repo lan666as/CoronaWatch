@@ -27,13 +27,6 @@ namespace CoronaWatchUI
         public static Snackbar Snackbar;
         public MainWindow()
         {
-            /*
-            MainWindowViewModel region = new MainWindowViewModel();
-            region.Regions.Sort((x, y) => x.Name.CompareTo(y.Name));
-            DataContext = region;
-            InitializeComponent();
-            */
-
             InitializeComponent();
 
             Task.Factory.StartNew(() =>

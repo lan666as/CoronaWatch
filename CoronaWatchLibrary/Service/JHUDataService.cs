@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace CoronaWatchLibrary
 {
@@ -130,33 +131,51 @@ namespace CoronaWatchLibrary
 
         public static List<Region> FetchSummary()
         {
-            List<Region> regions = new List<Region>();
-            var client = new RestClient(API + "summary")
+            try
             {
-                Timeout = -1
-            };
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
-            var json = SimpleJson.DeserializeObject(response.Content);
-            JObject obj = JObject.Parse(json.ToString());
-            JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
-
-            foreach (dynamic jsonObject in array)
-            {
-                Statistic statistic = new Statistic(Convert.ToInt32(jsonObject["TotalConfirmed"].ToString()), Convert.ToInt32(jsonObject["TotalRecovered"].ToString()), Convert.ToInt32(jsonObject["TotalDeaths"].ToString()))
+                List<Region> regions = new List<Region>();
+                var client = new RestClient(API + "summary")
                 {
-                    StatisticID = jsonObject["CountryCode"].ToString()
+                    Timeout = -1
                 };
-                DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
-                Report report = new Report(date, statistic);
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                var json = SimpleJson.DeserializeObject(response.Content);
+                JObject obj = JObject.Parse(json.ToString());
+                JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
 
-                Region region = new Region(jsonObject["Country"], Region.EnumLevel.Country, jsonObject["Slug"], jsonObject["CountryCode"])
+                foreach (dynamic jsonObject in array)
                 {
-                    Report = report
-                };
-                regions.Add(region);
+                    Statistic statistic = new Statistic(Convert.ToInt32(jsonObject["TotalConfirmed"].ToString()), Convert.ToInt32(jsonObject["TotalRecovered"].ToString()), Convert.ToInt32(jsonObject["TotalDeaths"].ToString()))
+                    {
+                        StatisticID = jsonObject["CountryCode"].ToString()
+                    };
+                    DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                    Report report = new Report(date, statistic);
+
+                    Region region = new Region(jsonObject["Country"], Region.EnumLevel.Country, jsonObject["Slug"], jsonObject["CountryCode"])
+                    {
+                        Report = report
+                    };
+                    regions.Add(region);
+                }
+                return regions;
             }
-            return regions;
+            catch (Exception e)
+            {
+                if (e.Message == "Invalid JSON string")
+                {
+                    MessageBox.Show(e.Message + "\nPlease Check Your Connection", "Error", MessageBoxButton.OK);
+                    return null;
+                }
+                else
+                {
+                    MessageBox.Show(e.Message, "Error");
+                    return null;
+                }
+                
+            }
+
         }
     }
 }
