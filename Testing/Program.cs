@@ -12,10 +12,6 @@ using Newtonsoft.Json;
 using System.Security.Cryptography;
 using Force.Crc32;
 using System.Text.RegularExpressions;
-using CoronaWatchLibrary.Service;
-using CoronaWatchDB;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
 
 namespace Testing
 {
@@ -23,29 +19,44 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            #region Testing Aldo
-            Console.WriteLine(Regex.Match(System.DateTime.UtcNow.Date.ToString(), @"\d{2}/\d{2}/\d{4}").Value);
-            Console.WriteLine("Updating DB...");
-                try
-                {
-                    DatabaseDataService.UpdateDatabase();
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
-                }
+            #region Testing Zidan
+            /*WebRequest request = WebRequest.Create("https://api.covid19api.com/" + "summary");
+            request.Credentials = CredentialCache.DefaultCredentials;
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            dynamic stuff;
+            using (Stream dataStream = response.GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(dataStream);
+                string responseFromServer = reader.ReadToEnd();
+                stuff = JObject.Parse(responseFromServer);
+            }
+            var Global = stuff["Global"];
+            Console.WriteLine(Global.ToString());
 
-            Console.ReadLine();
+
+            Console.ReadKey();*/
+            #endregion
+
+            #region Testing Aldo
+
+            List<Region> regions = new List<Region>();
+            List<Report> reports = new List<Report>();
+
+            regions = JHUDataService.FetchAllRegion();
+            reports = JHUDataService.FetchRegionSummary();
+
+            foreach(Report report in reports)
+            {
+                Console.WriteLine(report.Statistic.StatisticID);
+                Region currentRegion = regions.Where(u => u.ISOCode == report.Statistic.StatisticID).FirstOrDefault();
+                Console.WriteLine(currentRegion.Name);
+                Console.WriteLine(report.Statistic.ConfirmedCases);
+                Console.WriteLine(report.LastUpdate);
+                Console.WriteLine("---------------------");
+            }
+
+            Console.Read();
             #endregion
         }
 
