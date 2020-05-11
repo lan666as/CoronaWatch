@@ -4,16 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A02DF46D-D0AC-4C26-964A-92617276360C}</ProjectGuid>
+    <ProjectGuid>{D237E215-5D7F-45FC-9A7C-E5CE127E7BCB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoronaWatchLibrary</RootNamespace>
-    <AssemblyName>CoronaWatchLibrary</AssemblyName>
+    <RootNamespace>CoronaWatchDB</RootNamespace>
+    <AssemblyName>CoronaWatchDB</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,17 +37,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,29 +50,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DataCorona.cs" />
-    <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\Region.cs" />
-    <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\Statistic.cs" />
-    <Compile Include="Models\TimeSeries.cs" />
-    <Compile Include="PetaPersebaran.cs" />
+    <Compile Include="CoronaWatchDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoronaWatchDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoronaWatchDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoronaWatchDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\BaseDataService.cs" />
-    <Compile Include="Service\DatabaseDataService.cs" />
-    <Compile Include="Service\JHUDataService.cs" />
-    <Compile Include="SocialMedia\ISocialMedia.cs" />
-    <Compile Include="SocialMedia\Twitter.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="RegionDB.cs">
+      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDB.cs">
+      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="CoronaWatchDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CoronaWatchDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="CoronaWatchDBModel.edmx.diagram">
+      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoronaWatchDB\CoronaWatchDB.csproj">
-      <Project>{D237E215-5D7F-45FC-9A7C-E5CE127E7BCB}</Project>
-      <Name>CoronaWatchDB</Name>
-    </ProjectReference>
+    <Content Include="CoronaWatchDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CoronaWatchDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CoronaWatchDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
+      <LastGenOutput>CoronaWatchDBModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
