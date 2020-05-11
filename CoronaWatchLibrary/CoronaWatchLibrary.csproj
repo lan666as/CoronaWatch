@@ -67,7 +67,6 @@
     <Compile Include="PetaPersebaran.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BaseDataService.cs" />
-    <Compile Include="Service\DatabaseDataService.cs" />
     <Compile Include="Service\JHUDataService.cs" />
     <Compile Include="SocialMedia\ISocialMedia.cs" />
     <Compile Include="SocialMedia\Twitter.cs" />
