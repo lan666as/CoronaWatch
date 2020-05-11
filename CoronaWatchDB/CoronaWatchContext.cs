@@ -7,15 +7,13 @@ namespace CoronaWatchDB
 
     public partial class CoronaWatchContext : DbContext
     {
-        public CoronaWatchContext()
-            : base("name=CoronaWatchContext")
+        public CoronaWatchContext() : base("CoronaWatchDatabase")
         {
             Database.SetInitializer<CoronaWatchContext>(new CreateDatabaseIfNotExists<CoronaWatchContext>());
         }
 
         public virtual DbSet<RegionDB> RegionDBs { get; set; }
         public virtual DbSet<ReportDB> ReportDBs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

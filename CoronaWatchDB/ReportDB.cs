@@ -6,8 +6,7 @@ namespace CoronaWatchDB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ReportDB")]
-    public partial class ReportDB
+    public class ReportDB
     {
         public int Id { get; set; }
 

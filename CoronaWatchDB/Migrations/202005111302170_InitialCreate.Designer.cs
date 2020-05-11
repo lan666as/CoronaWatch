@@ -13,7 +13,7 @@ namespace CoronaWatchDB.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005111138082_InitialCreate"; }
+            get { return "202005111302170_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

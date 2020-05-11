@@ -1,4 +1,5 @@
-﻿using CoronaWatchLibrary;
+﻿using CoronaWatchDB;
+using CoronaWatchLibrary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,6 +60,13 @@ namespace CoronaWatchUI.Domain
 
         private static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
+            CoronaWatchContext context = new CoronaWatchContext();
+            
+            if(context.ReportDBs.Count() == 0)
+            {
+                JHUDataService.UpdateDatabase();
+            }
+
             List<Region> regions = JHUDataService.FetchDatabase();
             ObservableCollection<RegionGridsViewModel> regionGrids = new ObservableCollection<RegionGridsViewModel>();
 

@@ -10,6 +10,7 @@ namespace CoronaWatchDB.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "CoronaWatchDB.CoronaWatchContext";
         }
 
         protected override void Seed(CoronaWatchDB.CoronaWatchContext context)
