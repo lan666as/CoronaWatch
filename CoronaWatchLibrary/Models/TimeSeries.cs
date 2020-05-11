@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -32,11 +31,6 @@ namespace CoronaWatchLibrary
             this.Source = source;
         }
 
-        public void Add(Statistic statistic, DateTime dateTime)
-        {
-            this.StatisticSeries.Add(statistic);
-            this.DateSeries.Add(dateTime);
-        }
 
         public DateTime LastUpdate()
         {
