@@ -50,7 +50,13 @@ namespace CoronaWatchLibrary.Service
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\nPlease Check Your Connection", "Error");
+
+                if (e.Message == "Invalid JSON string")
+                {
+                    MessageBox.Show(e.Message + "\nPlease Check Your Connection", "Error", MessageBoxButton.OK);
+                }
+                else
+                    MessageBox.Show(e.Message, "Error");
             }
             
         }
@@ -63,7 +69,7 @@ namespace CoronaWatchLibrary.Service
 
                 // Updating Region List, if exist
                 InitializeDatabase();
-                //Console.WriteLine("Database Initialized");
+                Console.WriteLine("Database Initialized");
 
                 // Check if the current data for ReportDB is exist. Note that ReportDB is equivalent to Report.
                 // Different Name used to avoid confusion and ambiguity
@@ -80,7 +86,8 @@ namespace CoronaWatchLibrary.Service
                 foreach (JsonObject jsonObject in array)
                 {
                     DateTime APIdate = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
-                    if (context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == APIdate).FirstOrDefault() == null)
+                    string CountryName = jsonObject["CountryCode"].ToString();
+                    if (context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == APIdate && r.ISOCode == CountryName).FirstOrDefault() == null)
                     {
                         ReportDB reportDB = new ReportDB();
                         reportDB.ISOCode = jsonObject["CountryCode"].ToString();
@@ -94,11 +101,16 @@ namespace CoronaWatchLibrary.Service
                     }
    
                 }
-                //Console.WriteLine("Done fetching");
+                Console.WriteLine("Done fetching");
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\nPlease Check Your Connection", "Error");
+                if (e.Message == "Invalid JSON string")
+                {
+                    MessageBox.Show(e.Message + "\nPlease Check Your Connection", "Error", MessageBoxButton.OK);
+                }
+                else
+                    MessageBox.Show(e.Message, "Error");
             }
             
         }
