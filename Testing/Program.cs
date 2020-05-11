@@ -28,7 +28,7 @@ namespace Testing
             Console.WriteLine("Updating DB...");
                 try
                 {
-                    DatabaseDataService.UpdateDatabase();
+                    JHUDataService.UpdateDatabase();
                 }
                 catch (DbEntityValidationException e)
                 {

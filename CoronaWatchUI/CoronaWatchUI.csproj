@@ -184,6 +184,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoronaWatchDB\CoronaWatchDB.csproj">
+      <Project>{d237e215-5d7f-45fc-9a7c-e5ce127e7bcb}</Project>
+      <Name>CoronaWatchDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoronaWatchLibrary\CoronaWatchLibrary.csproj">
       <Project>{a02df46d-d0ac-4c26-964a-92617276360c}</Project>
       <Name>CoronaWatchLibrary</Name>
