@@ -10,6 +10,7 @@ namespace CoronaWatchDB
         public CoronaWatchContext()
             : base("name=CoronaWatchContext")
         {
+            Database.SetInitializer<CoronaWatchContext>(new CreateDatabaseIfNotExists<CoronaWatchContext>());
         }
 
         public virtual DbSet<RegionDB> RegionDBs { get; set; }
