@@ -20,7 +20,7 @@ namespace Testing
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             #region Testing Aldo
             Console.WriteLine(Regex.Match(System.DateTime.UtcNow.Date.ToString(), @"\d{2}/\d{2}/\d{4}").Value);
@@ -46,13 +46,6 @@ namespace Testing
 
             Console.ReadLine();
             #endregion
-        }
-
-        private void ParseWorldReports(JArray jArray, ref Region world)
-        {
-            Statistic statistic = new Statistic(confirmed : (int) jArray["TotalConfirmed"], recovered : (int) jArray["TotalRecovered"], death : (int) jArray["TotalDeaths"]);
-            Report report = new Report(statistic);
-            world.Report = report;
         }
     }
 }

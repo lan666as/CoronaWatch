@@ -19,7 +19,7 @@ namespace CoronaWatchUI.Domain
         /// <summary>
         /// Opens a web map stored in ArcGIS Online and uses it to set the MapViewModel.Map property
         /// </summary>
-        private async void LoadWebMap()
+        private void LoadWebMap()
         {
             var itemId = "c1a139e47e5640ca9ab4b3acc58077ef";
             var webMapUrl = string.Format("http://www.arcgis.com/sharing/rest/content/items/{0}/data", itemId);
@@ -44,9 +44,7 @@ namespace CoronaWatchUI.Domain
         /// <param name="propertyName">The name of the property that has changed</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var propertyChangedHandler = PropertyChanged;
-            if (propertyChangedHandler != null)
-                propertyChangedHandler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
