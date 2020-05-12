@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoronaWatchUI.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace CoronaWatchUI.Controls
         public CoronaChart()
         {
             InitializeComponent();
+        }
+
+        private void btn_viewChart_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as CoronaChartViewModel;
+            var series = viewModel.UpdateSeries();
+            cht_countryChart.Series = series;  
         }
     }
 }

@@ -111,7 +111,7 @@ namespace CoronaWatchLibrary
             {
                 return region.TimeSeries;
             }
-            var client = new RestClient(API+ "/dayone/country/"+region.Slug)
+            var client = new RestClient(API+ "/country/"+region.Slug)
             {
                 Timeout = -1
             };
