@@ -266,7 +266,7 @@ namespace CoronaWatchLibrary
                     }
 
                 }
-                Console.WriteLine("Done fetching");
+                MessageBox.Show("Successfully Updated DB");
             }
             catch (Exception e)
             {
@@ -309,6 +309,7 @@ namespace CoronaWatchLibrary
                 regions.Add(region);
             }
 
+            // Sort by Name, actually unneccesary. Can be delete to improve performance
             regions.Sort((x, y) => x.Name.CompareTo(y.Name));
             return regions;
         }

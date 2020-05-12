@@ -20,10 +20,16 @@
                        HorizontalAlignment="Center">
                 Worldwide Cases
             </TextBlock>
-            <DataGrid  Margin="0 8 0 0" ItemsSource="{Binding Items}" CanUserSortColumns="True" CanUserAddRows="False"
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Last Update:" Margin="4, 0, 0, 0" Style="{StaticResource MaterialDesignBody1TextBlock}" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbk_LastUpdate" Text="{Binding LastUpdate, StringFormat=d, NotifyOnSourceUpdated=True}" Margin="4, 0, 0, 0" Style="{StaticResource MaterialDesignBody1TextBlock}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Button x:Name="btn_Update" Content="Update" HorizontalAlignment="Right" Margin="0, 0, 12, 0" Click="btn_Update_Click"/>
+            </Grid>
+            <DataGrid  x:Name="dtg_World" Margin="0 8 0 0" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" CanUserSortColumns="True" CanUserAddRows="False"
                        AutoGenerateColumns="True"
-                       ScrollViewer.CanContentScroll="True" >
-            </DataGrid>
+                       ScrollViewer.CanContentScroll="True" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>
