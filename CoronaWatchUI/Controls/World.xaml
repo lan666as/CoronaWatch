@@ -37,10 +37,10 @@
             </StackPanel>
             <Button x:Name="btn_Update" Content="Update" HorizontalAlignment="Right" Margin="0, 0, 12, 0" Click="btn_Update_Click"/>
         </Grid>
-        <DataGrid   Margin="8 8 0 0" ItemsSource="{Binding ItemsView}" CanUserSortColumns="True" CanUserAddRows="False"
+        <DataGrid   Margin="8 8 0 0" ItemsSource="{Binding ItemsView, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" CanUserSortColumns="True" CanUserAddRows="False"
                     Grid.Row="2"
                     AutoGenerateColumns="False"
-                    x:Name="countriesDataGrid"
+                    x:Name="dtg_World"
                     ScrollViewer.CanContentScroll="True" >
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
