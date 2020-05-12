@@ -15,6 +15,7 @@ namespace CoronaWatchUI.Domain
     public class WorldGridsViewModel : INotifyPropertyChanged
     {
         private readonly ObservableCollection<RegionGridsViewModel> _items;
+        static private DateTime _lastUpdate;
 
         public WorldGridsViewModel()
         {
@@ -61,7 +62,10 @@ namespace CoronaWatchUI.Domain
         }
         */
 
-        private static ObservableCollection<RegionGridsViewModel> GenerateData()
+        
+
+
+        public static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
             CoronaWatchContext context = new CoronaWatchContext();
             
@@ -73,15 +77,27 @@ namespace CoronaWatchUI.Domain
             List<Region> regions = JHUDataService.FetchDatabase();
             ObservableCollection<RegionGridsViewModel> regionGrids = new ObservableCollection<RegionGridsViewModel>();
 
-            foreach(Region reg in regions)
+            foreach (Region reg in regions)
             {
                 RegionGridsViewModel regGrid = new RegionGridsViewModel(reg);
                 regionGrids.Add(regGrid);
             }
+
+            _lastUpdate = Convert.ToDateTime(context.ReportDBs.OrderByDescending(r => r.Date).FirstOrDefault().Date);
             return regionGrids;
         }
 
         public ObservableCollection<RegionGridsViewModel> Items => _items;
+        public DateTime LastUpdate
+        {
+            get { return _lastUpdate; }
+            set
+            {
+                _lastUpdate = value;
+                OnPropertyChanged("");
+            }
+        }
+
 
         public ICollectionView ItemsView
         {
