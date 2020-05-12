@@ -17,6 +17,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Center">
@@ -29,8 +30,15 @@
                     CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
                     VerticalAlignment="Center"/>
         </StackPanel>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Last Update:" Margin="4, 0, 0, 0" Style="{StaticResource MaterialDesignBody1TextBlock}" VerticalAlignment="Center"/>
+                <TextBlock x:Name="tbk_LastUpdate" Text="{Binding LastUpdate, StringFormat=d, NotifyOnSourceUpdated=True}" Margin="4, 0, 0, 0" Style="{StaticResource MaterialDesignBody1TextBlock}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="btn_Update" Content="Update" HorizontalAlignment="Right" Margin="0, 0, 12, 0" Click="btn_Update_Click"/>
+        </Grid>
         <DataGrid   Margin="8 8 0 0" ItemsSource="{Binding ItemsView}" CanUserSortColumns="True" CanUserAddRows="False"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     AutoGenerateColumns="False"
                     x:Name="countriesDataGrid"
                     ScrollViewer.CanContentScroll="True" >
