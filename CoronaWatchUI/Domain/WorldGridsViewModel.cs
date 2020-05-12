@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace CoronaWatchUI.Domain
 {
@@ -18,6 +19,8 @@ namespace CoronaWatchUI.Domain
         public WorldGridsViewModel()
         {
             _items = GenerateData();
+
+            ItemsView.Filter = new Predicate<object>(o => Filter(o as RegionGridsViewModel));
 
             /*
             foreach (var model in _items)
@@ -79,6 +82,30 @@ namespace CoronaWatchUI.Domain
         }
 
         public ObservableCollection<RegionGridsViewModel> Items => _items;
+
+        public ICollectionView ItemsView
+        {
+            get { return CollectionViewSource.GetDefaultView(Items); }
+        }
+
+        private bool Filter(RegionGridsViewModel region)
+        {
+            return Search == null
+                || region.Name.IndexOf(Search, StringComparison.OrdinalIgnoreCase) != -1;
+        }
+
+        private string _search;
+
+        public string Search
+        {
+            get { return _search; }
+            set
+            {
+                _search = value;
+                OnPropertyChanged();
+                ItemsView.Refresh(); // required    
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
