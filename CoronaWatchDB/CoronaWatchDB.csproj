@@ -50,59 +50,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoronaWatchDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoronaWatchDBModel.Context.tt</DependentUpon>
+    <Compile Include="CoronaWatchContext.cs" />
+    <Compile Include="Migrations\202005111302170_InitialCreate.cs" />
+    <Compile Include="Migrations\202005111302170_InitialCreate.Designer.cs">
+      <DependentUpon>202005111302170_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="CoronaWatchDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CoronaWatchDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegionDB.cs">
-      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReportDB.cs">
-      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>CoronaWatchDBModel.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="CoronaWatchDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CoronaWatchDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="RegionDB.cs" />
+    <Compile Include="ReportDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CoronaWatchDBModel.edmx.diagram">
-      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CoronaWatchDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CoronaWatchDBModel.Context.cs</LastGenOutput>
-      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="CoronaWatchDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CoronaWatchDBModel.edmx</DependentUpon>
-      <LastGenOutput>CoronaWatchDBModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\202005111302170_InitialCreate.resx">
+      <DependentUpon>202005111302170_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

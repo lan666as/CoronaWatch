@@ -1,5 +1,4 @@
-﻿using CoronaWatchUI.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,20 +16,13 @@ using System.Windows.Shapes;
 namespace CoronaWatchUI.Controls
 {
     /// <summary>
-    /// Interaction logic for CoronaChart.xaml
+    /// Interaction logic for Feed.xaml
     /// </summary>
-    public partial class CoronaChart : UserControl
+    public partial class Feed : UserControl
     {
-        public CoronaChart()
+        public Feed()
         {
             InitializeComponent();
-        }
-
-        private void btn_viewChart_Click(object sender, RoutedEventArgs e)
-        {
-            var viewModel = DataContext as CoronaChartViewModel;
-            var series = viewModel.UpdateSeries();
-            cht_countryChart.Series = series;  
         }
     }
 }

@@ -6,11 +6,25 @@
              xmlns:local="clr-namespace:CoronaWatchUI.Controls"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Height="Auto" Width="Auto">
     <Grid>
-        <lvc:CartesianChart Series="{Binding Series}" LegendLocation="Right" >
+        <ComboBox ItemsSource="{Binding Regions}" Height="25" Width="120" Background="White" ScrollViewer.CanContentScroll="True" 
+                  MaxDropDownHeight="120" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,24,22,0"
+                  SelectedItem="{Binding SelectedRegion, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="btn_viewChart" Content="View Chart" Style="{StaticResource MaterialDesignRaisedButton}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,64,22,0" Width="76" FontSize="12" Padding="0,0,0,0" Height="28" Click="btn_viewChart_Click" Command=""/>
+        <TextBlock Text="{Binding Path=SelectedRegion.Name}" Width="200" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Height="30"
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="48, 24, 0, 0"/>
+        <lvc:CartesianChart x:Name="cht_countryChart" Series="{Binding Series, Mode=TwoWay}" 
+                            LegendLocation="Right" Margin="0,10,50,0">
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Cases" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>

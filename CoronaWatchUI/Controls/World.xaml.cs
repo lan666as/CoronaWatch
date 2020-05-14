@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CoronaWatchLibrary;
+using CoronaWatchUI.Domain;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,26 @@ namespace CoronaWatchUI.Controls
         public World()
         {
             InitializeComponent();
+        }
+
+        private void btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbk_LastUpdate.Text != System.DateTime.Today.ToString("M/dd/yyyy"))
+            {
+                try
+                {
+                    JHUDataService.UpdateDatabase();
+                }
+                finally
+                {
+                    dtg_World.ItemsSource = WorldGridsViewModel.GenerateData();
+                    tbk_LastUpdate.Text = System.DateTime.Today.ToString("M/dd/yyyy");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Already Up to date");
+            }
         }
     }
 }

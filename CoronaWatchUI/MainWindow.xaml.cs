@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoronaWatchLibrary;
 using CoronaWatchUI.Domain;
+using MaterialDesignExtensions.Controls;
 using MaterialDesignThemes.Wpf;
 
 namespace CoronaWatchUI
@@ -22,7 +23,7 @@ namespace CoronaWatchUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MaterialWindow
     {
         public static Snackbar Snackbar;
         public MainWindow()

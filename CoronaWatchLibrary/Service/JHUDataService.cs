@@ -111,7 +111,7 @@ namespace CoronaWatchLibrary
             {
                 return region.TimeSeries;
             }
-            var client = new RestClient(API+ "/dayone/country/"+region.Slug)
+            var client = new RestClient(API+ "/country/"+region.Slug)
             {
                 Timeout = -1
             };
@@ -196,7 +196,7 @@ namespace CoronaWatchLibrary
                 JObject obj = JObject.Parse(json.ToString());
                 JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
 
-                CoronaWatchDBEntities context = new CoronaWatchDBEntities();
+                CoronaWatchContext context = new CoronaWatchContext();
                 foreach (JsonObject jsonObject in array)
                 {
                     string ISOCode = jsonObject["CountryCode"].ToString();
@@ -231,7 +231,7 @@ namespace CoronaWatchLibrary
         {
             try
             {
-                CoronaWatchDBEntities context = new CoronaWatchDBEntities();
+                CoronaWatchContext context = new CoronaWatchContext();
 
                 // Updating Region List, if exist
                 InitializeDatabase();
@@ -266,7 +266,7 @@ namespace CoronaWatchLibrary
                     }
 
                 }
-                Console.WriteLine("Done fetching");
+                MessageBox.Show("Successfully Updated DB");
             }
             catch (Exception e)
             {
@@ -287,31 +287,33 @@ namespace CoronaWatchLibrary
         public static List<Region> FetchDatabase()
         {
             List<Region> regions = new List<Region>();
-            using (CoronaWatchDBEntities context = new CoronaWatchDBEntities())
-            {
-                DateTime currentDate = System.DateTime.UtcNow.Date;
-                DateTime latestDateOnDB = Convert.ToDateTime(context.ReportDBs.Max(r => r.Date)).Date;
-                List<RegionDB> regionDBs = context.RegionDBs.ToList();
-                List<ReportDB> reportDBs = context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == latestDateOnDB).ToList();
+            CoronaWatchContext context = new CoronaWatchContext();
 
-                foreach (RegionDB regionDB in regionDBs)
+            DateTime currentDate = System.DateTime.UtcNow.Date;
+            DateTime latestDateOnDB = Convert.ToDateTime(context.ReportDBs.Max(r => r.Date)).Date;
+            List<RegionDB> regionDBs = context.RegionDBs.ToList();
+            List<ReportDB> reportDBs = context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == latestDateOnDB).ToList();
+
+            foreach (RegionDB regionDB in regionDBs)
+            {
+                ReportDB reportDB = reportDBs.Where(r => r.ISOCode == regionDB.ISOCode).FirstOrDefault();
+                Statistic statistic = new Statistic((int)reportDB.Confirmed, (int)reportDB.Recovered, (int)reportDB.Death)
                 {
-                    ReportDB reportDB = reportDBs.Where(r => r.ISOCode == regionDB.ISOCode).FirstOrDefault();
-                    Statistic statistic = new Statistic((int)reportDB.Confirmed, (int)reportDB.Recovered, (int)reportDB.Death)
-                    {
-                        StatisticID = reportDB.ISOCode
-                    };
-                    Report report = new Report(Convert.ToDateTime(reportDB.Date).Date, statistic);
-                    Region region = new Region(regionDB.Name, Region.EnumLevel.Country, regionDB.Slug, regionDB.ISOCode)
-                    {
-                        Report = report
-                    };
-                    regions.Add(region);
-                }
+                    StatisticID = reportDB.ISOCode
+                };
+                Report report = new Report(Convert.ToDateTime(reportDB.Date).Date, statistic);
+                Region region = new Region(regionDB.Name, Region.EnumLevel.Country, regionDB.Slug, regionDB.ISOCode)
+                {
+                    Report = report
+                };
+                regions.Add(region);
             }
+
+            // Sort by Name, actually unneccesary. Can be delete to improve performance
             regions.Sort((x, y) => x.Name.CompareTo(y.Name));
             return regions;
         }
         #endregion
+
     }
 }
