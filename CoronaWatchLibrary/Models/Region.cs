@@ -25,10 +25,6 @@ namespace CoronaWatchLibrary
         {
 
         }
-        public Region(string slug)
-        {
-            this.Slug = slug;
-        }
         public Region(string name, EnumLevel level, string slug, string isoCode)
         {
             this.Name = name;
