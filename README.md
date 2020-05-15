@@ -15,3 +15,8 @@ CoronaWatch is a C# Application Project to track and watch Covid-19 cases worldw
 | 19/439805/TK/48535 | Agustina Asmoro Putri |
 | 19/439806/TK/48536 | Ahmad Zidan |
 | 19/439807/TK/48537 | Aldo Arya Saka Mukti |
+
+# Repository
+
+<a href="https://dev.azure.com/ahmadzidan/CoronaWatch/_git/CoronaWatch" target="_blank">Azure DevOps (Main Repository)</a><br>
+<a href="https://github.com/lan666as/CoronaWatch (mirror)" target="_blank">Github (Mirror Repository)</a>
