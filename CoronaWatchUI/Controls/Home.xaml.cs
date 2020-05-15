@@ -23,14 +23,16 @@ namespace CoronaWatchUI.Controls
         {
             List<string> toWrite = new List<string>()
             {
-                "Lorem ipsum dolor sit amet",
-                "consectetur adipiscing elit",
-                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                "Ut enim ad minim veniam",
-                "quis nostrud exercitation ullamco laboris",
-                "nisi ut aliquip ex ea commodo consequat",
-                "Duis aute irure dolor in reprehenderit in voluptate",
-                "velit esse cillum dolore eu fugiat nulla pariatur"
+                "We provide up to date data and chart",
+                "Welcome to CoronaWatch",
+                "#StayHealhty #StayAtHome",
+                "Jangan lupa pyshical distancing",
+                "#FlattenTheCurve",
+                "Tetap semangat kita pasti bisa melewati ini",
+                "Opportunities to find deeper powers within ourselves come when life seems most challenging.",
+                "In the midst of chaos, there is also opportunity.",
+                "The wound is the place where the light enters you."
+
             };
             TextBlock tb = (TextBlock)this.FindName("typewriterTextBlock");
             Int64 timeToWrite = Convert.ToInt64(((double)String.Join("", toWrite).Length * 10000000.0) * (60.0 / 350.0));

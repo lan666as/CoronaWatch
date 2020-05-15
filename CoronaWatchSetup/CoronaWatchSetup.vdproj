@@ -3893,7 +3893,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CoronaWatch"
         "ProductCode" = "8:{B0C8030B-5CD1-4A58-8A9C-47C85171AFB9}"
-        "PackageCode" = "8:{CC9D25D1-1486-4A30-98C1-AE88D2075595}"
+        "PackageCode" = "8:{20FE850F-BB3B-4CDC-9A43-6B12E50FEB8A}"
         "UpgradeCode" = "8:{4BC46950-A1BC-4AD5-AB57-1F61C11DE799}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -4015,7 +4015,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1E9D81E58C9E489E9B23523F0907BA99"
             {
-            "Name" = "8:Shortcut to Primary output from CoronaWatchUI (Active)"
+            "Name" = "8:CoronaWatch"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -4029,14 +4029,14 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4C93678992C446AEAF27DA300F6294B4"
             {
-            "Name" = "8:Shortcut to Primary output from CoronaWatchUI (Active)"
+            "Name" = "8:CoronaWatch"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_F77E004118D74133AB4C427DDE63C4BE"
-            "Folder" = "8:_E1257FB0F4E64F82816C4A90B5BD67F1"
+            "Folder" = "8:_13D2687B52D8474891EDC7D57FB93868"
             "WorkingFolder" = "8:_E1257FB0F4E64F82816C4A90B5BD67F1"
             "Icon" = "8:_686641E040524F1D8BE80D139E57B493"
             "Feature" = "8:"
