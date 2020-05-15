@@ -18,6 +18,7 @@
         mc:Ignorable="d"
         Title="CoronaWatch"
         MinWidth="1100"
+        FadeContentIfInactive="False"
         MinHeight="768" WindowStartupLocation="CenterScreen" Icon="Assets/Images/Favicon.png">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
