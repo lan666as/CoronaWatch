@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:CoronaWatchUI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

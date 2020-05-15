@@ -4,11 +4,73 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoronaWatchUI.Controls"
+             Loaded="OnLoad"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="FrameworkElement" x:Key="LoadFade">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer>
-        <StackPanel Margin="100,0,100,0" VerticalAlignment="Center">
-            <Label Content="Welcome to CoronaWatch" FontSize="30" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="50,0,50,0" VerticalAlignment="Center">
+                <TextBlock
+                    Margin="0,0,0,25"
+                    Style="{StaticResource LoadFade}"
+                    FontSize="66"
+                    HorizontalAlignment="Center"
+                    Foreground="#0d47a1">
+                    <Span FontWeight="Regular">Welcome to</Span> <Span FontWeight="Regular">Corona</Span><Span FontWeight="Light">Watch</Span>
+                </TextBlock>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    x:Name="typewriterTextBlock"
+                    FontSize="24"
+                    />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="50,10,50,10" Orientation="Horizontal">
+                
+            </StackPanel>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/CoronaWatchUI;component/Assets/Images/hospital.png"
+                       Margin="20,0,0,0"
+                       Width="auto"
+                       MinHeight="250"
+                       MaxHeight="360"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                           />
+                <Image Source="/CoronaWatchUI;component/Assets/Images/home.png"
+                       Width="auto"
+                       MinHeight="250"
+                       MaxHeight="320"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Grid.Column="1"
+                           />
+            </Grid>
+        </Grid>
     </ScrollViewer>
 </UserControl>

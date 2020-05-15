@@ -1,59 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CoronaWatchDB;
 using Newtonsoft.Json.Linq;
-using CoronaWatchLibrary;
 using RestSharp;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
-using Force.Crc32;
-using System.Text.RegularExpressions;
-using CoronaWatchLibrary.Service;
-using CoronaWatchDB;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
+using System;
+using System.Linq;
 
 namespace Testing
 {
     class Program
     {
-        static void Main(string[] args)
+        private static readonly string API = "https://api.covid19api.com/";
+
+        static void Main()
         {
             #region Testing Aldo
-            Console.WriteLine(Regex.Match(System.DateTime.UtcNow.Date.ToString(), @"\d{2}/\d{2}/\d{4}").Value);
-            Console.WriteLine("Updating DB...");
-                try
+            try
+            {
+                var client = new RestClient(API + "summary")
                 {
-                    DatabaseDataService.UpdateDatabase();
-                }
-                catch (DbEntityValidationException e)
+                    Timeout = -1
+                };
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                var json = SimpleJson.DeserializeObject(response.Content);
+                JObject obj = JObject.Parse(json.ToString());
+                JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
+
+                CoronaWatchContext context = new CoronaWatchContext();
+
+                foreach (JsonObject jsonObject in array)
                 {
-                    foreach (var eve in e.EntityValidationErrors)
+                    string ISOCode = jsonObject["CountryCode"].ToString();
+                    Console.WriteLine(ISOCode);
+                    if (context.RegionDBs.Where(r => r.ISOCode == ISOCode).FirstOrDefault() == null)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
+                        RegionDB regionDB = new RegionDB
                         {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
+                            ISOCode = jsonObject["CountryCode"].ToString(),
+                            Name = jsonObject["Country"].ToString(),
+                            Slug = jsonObject["Slug"].ToString()
+                        };
+                        context.RegionDBs.Add(regionDB);
+                        context.SaveChanges();
                     }
-                    throw;
+                    Console.WriteLine("ABC");
                 }
+            }
+            catch (Exception e)
+            {
+
+                if (e.Message == "Invalid JSON string")
+                {
+                    Console.WriteLine(e.Message + "\nPlease Check Your Connection Error");
+                }
+                else
+                {
+                    Console.WriteLine(e.Message + "Error");
+                }
+            }
+            #endregion
 
             Console.ReadLine();
-            #endregion
-        }
-
-        private void ParseWorldReports(JArray jArray, ref Region world)
-        {
-            Statistic statistic = new Statistic(confirmed : (int) jArray["TotalConfirmed"], recovered : (int) jArray["TotalRecovered"], death : (int) jArray["TotalDeaths"]);
-            Report report = new Report(statistic);
-            world.Report = report;
         }
     }
 }

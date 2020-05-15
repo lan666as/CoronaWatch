@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,6 +9,7 @@ namespace CoronaWatchUI.Domain
     {
         private string _name;
         private object _content;
+        private string _icon;
         private ScrollBarVisibility _horizontalScrollBarVisibilityRequirement;
         private ScrollBarVisibility _verticalScrollBarVisibilityRequirement;
         private Thickness _marginRequirement = new Thickness(16);
@@ -22,11 +19,23 @@ namespace CoronaWatchUI.Domain
             _name = name;
             Content = content;
         }
+        public MenuItem(string name, string icon, object content)
+        {
+            _name = name;
+            _icon = icon;
+            Content = content;
+        }
 
         public string Name
         {
             get { return _name; }
             set { this.MutateVerbose(ref _name, value, RaisePropertyChanged()); }
+        }
+
+        public string Icon
+        {
+            get { return _icon; }
+            set { this.MutateVerbose(ref _icon, value, RaisePropertyChanged()); }
         }
 
         public object Content

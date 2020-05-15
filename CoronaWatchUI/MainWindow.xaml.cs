@@ -1,39 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using CoronaWatchUI.Domain;
+using MaterialDesignExtensions.Controls;
+using MaterialDesignThemes.Wpf;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CoronaWatchLibrary;
-using CoronaWatchUI.Domain;
-using MaterialDesignThemes.Wpf;
 
 namespace CoronaWatchUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MaterialWindow
     {
         public static Snackbar Snackbar;
         public MainWindow()
         {
-            /*
-            MainWindowViewModel region = new MainWindowViewModel();
-            region.Regions.Sort((x, y) => x.Name.CompareTo(y.Name));
-            DataContext = region;
-            InitializeComponent();
-            */
-
             InitializeComponent();
 
             Task.Factory.StartNew(() =>

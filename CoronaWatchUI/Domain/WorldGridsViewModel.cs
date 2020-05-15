@@ -1,22 +1,26 @@
-﻿using CoronaWatchLibrary;
+﻿using CoronaWatchDB;
+using CoronaWatchLibrary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace CoronaWatchUI.Domain
 {
     public class WorldGridsViewModel : INotifyPropertyChanged
     {
         private readonly ObservableCollection<RegionGridsViewModel> _items;
+        static private DateTime _lastUpdate;
 
         public WorldGridsViewModel()
         {
             _items = GenerateData();
+
+            ItemsView.Filter = new Predicate<object>(o => Filter(o as RegionGridsViewModel));
+            ItemsView.Refresh();
 
             /*
             foreach (var model in _items)
@@ -57,20 +61,66 @@ namespace CoronaWatchUI.Domain
         }
         */
 
-        private static ObservableCollection<RegionGridsViewModel> GenerateData()
+
+
+
+        public static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
-            List<Region> regions = JHUDataService.FetchSummary();
+            CoronaWatchContext context = new CoronaWatchContext();
+
+            if (context.ReportDBs.Count() == 0)
+            {
+                JHUDataService.UpdateDatabase();
+            }
+
+            List<Region> regions = JHUDataService.FetchDatabase();
             ObservableCollection<RegionGridsViewModel> regionGrids = new ObservableCollection<RegionGridsViewModel>();
 
-            foreach(Region reg in regions)
+            foreach (Region reg in regions)
             {
                 RegionGridsViewModel regGrid = new RegionGridsViewModel(reg);
                 regionGrids.Add(regGrid);
             }
+
+            _lastUpdate = Convert.ToDateTime(context.ReportDBs.OrderByDescending(r => r.Date).FirstOrDefault().Date);
             return regionGrids;
         }
 
         public ObservableCollection<RegionGridsViewModel> Items => _items;
+        public DateTime LastUpdate
+        {
+            get { return _lastUpdate; }
+            set
+            {
+                _lastUpdate = value;
+                OnPropertyChanged("");
+            }
+        }
+
+
+        public ICollectionView ItemsView
+        {
+            get { return CollectionViewSource.GetDefaultView(Items); }
+        }
+
+        private bool Filter(RegionGridsViewModel region)
+        {
+            return Search == null
+                || region.Name.IndexOf(Search, StringComparison.OrdinalIgnoreCase) != -1;
+        }
+
+        private string _search;
+
+        public string Search
+        {
+            get { return _search; }
+            set
+            {
+                _search = value;
+                OnPropertyChanged();
+                ItemsView.Refresh();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

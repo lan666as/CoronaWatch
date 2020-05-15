@@ -1,14 +1,9 @@
-﻿using CoronaWatchLibrary;
+﻿using CoronaWatchUI.Controls;
 using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoronaWatchUI.Controls;
-using System.Windows.Controls;
 
 namespace CoronaWatchUI.Domain
 {
@@ -69,11 +64,12 @@ namespace CoronaWatchUI.Domain
 
             return new ObservableCollection<MenuItem>
             {
-                new MenuItem("Home", new Home()),
-                //new MenuItem("World", new World{ DataContext = new WorldGridsViewModel() }),
-                //new MenuItem("Chart", new CoronaChart{ DataContext = new CoronaChartViewModel()}),
-                new MenuItem("Map", new CoronaMap() { DataContext = new CoronaMapViewModel() } ),
-                new MenuItem("About", new About())
+                new MenuItem("Home", "Home", new Home()),
+                new MenuItem("World", "Earth", new World{ DataContext = new WorldGridsViewModel()}),
+                new MenuItem("Chart", "ChartTimelineVariant", new CoronaChart{ DataContext = new CoronaChartViewModel()}),
+                new MenuItem("Map", "Map", new CoronaMap() { DataContext = new CoronaMapViewModel() } ),
+                new MenuItem("Feed", "Rss", new Feed() { DataContext = new FeedViewModel()}),
+                new MenuItem("About", "Information", new About())
             };
         }
 

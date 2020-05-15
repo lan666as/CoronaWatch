@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CoronaWatchLibrary
 {
@@ -18,7 +14,7 @@ namespace CoronaWatchLibrary
         public string ParentName { get; protected set; }
         public Coordinate Location { get; set; }
         public string ISOCode { get; set; }
-        public string Slug {get; set;}
+        public string Slug { get; set; }
         public EnumLevel Level { get; set; }
         public List<Region> Children { get; set; }
 

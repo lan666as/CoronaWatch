@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CoronaWatchUI.Domain;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CoronaWatchUI.Controls
 {
@@ -23,6 +12,13 @@ namespace CoronaWatchUI.Controls
         public CoronaChart()
         {
             InitializeComponent();
+        }
+
+        private void btn_viewChart_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as CoronaChartViewModel;
+            var series = viewModel.UpdateSeries();
+            cht_countryChart.Series = series;
         }
     }
 }
