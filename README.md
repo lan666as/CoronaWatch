@@ -7,6 +7,8 @@
 <a href="https://dev.azure.com/ahmadzidan/CoronaWatch/_build/latest?definitionId=1&branchName=master"><img src="https://dev.azure.com/ahmadzidan/CoronaWatch/_apis/build/status/dotnet%20Desktop?branchName=master" alt="Build Status"></a>
 </p>
 
+![Demo](https://dev.azure.com/ahmadzidan/3f1fff71-df38-46ff-bf28-37d553a3a38a/_apis/git/repositories/0a298f0c-22db-45f5-9477-886b0eff9622/items?path=%2FCoronaWatchUI%2FAssets%2FImages%2FDemo.gif&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0)
+
 # CoronaWatch
 CoronaWatch is a C# Application Project to track and watch Covid-19 cases worldwide. Made with .NET Framework 4.8 and WPF with MaterialDesignInXAML. This application provides various informations include the latest data of Covid-19 cases in the world, especially in Indonesia. The database and APIs used come from various sources.
 # Team Members
