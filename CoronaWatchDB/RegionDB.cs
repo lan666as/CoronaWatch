@@ -22,7 +22,5 @@ namespace CoronaWatchDB
         [Key]
         [StringLength(4)]
         public string ISOCode { get; set; }
-
-        public virtual ICollection<ReportDB> ReportDBs { get; set; }
     }
 }

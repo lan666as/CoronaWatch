@@ -22,6 +22,7 @@ namespace CoronaWatchUI.Domain
             _items = GenerateData();
 
             ItemsView.Filter = new Predicate<object>(o => Filter(o as RegionGridsViewModel));
+            ItemsView.Refresh();
 
             /*
             foreach (var model in _items)
@@ -68,8 +69,9 @@ namespace CoronaWatchUI.Domain
         public static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
             CoronaWatchContext context = new CoronaWatchContext();
-            
-            if(context.ReportDBs.Count() == 0)
+
+            context.Database.EnsureCreated();
+            if (!context.ReportDBs.Any())
             {
                 JHUDataService.UpdateDatabase();
             }
@@ -119,7 +121,7 @@ namespace CoronaWatchUI.Domain
             {
                 _search = value;
                 OnPropertyChanged();
-                ItemsView.Refresh(); // required    
+                ItemsView.Refresh();
             }
         }
 

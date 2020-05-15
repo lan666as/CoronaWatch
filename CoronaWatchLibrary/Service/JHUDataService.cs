@@ -9,8 +9,9 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using CoronaWatchDB;
+using System.Security.Cryptography;
 
 namespace CoronaWatchLibrary
 {
@@ -98,7 +99,8 @@ namespace CoronaWatchLibrary
                 {
                     StatisticID = jsonObject["CountryCode"].ToString()
                 };
-                DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                //DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                DateTime date = DateTime.Parse(jsonObject["Date"].ToString(), null, System.Globalization.DateTimeStyles.RoundtripKind);
                 Report report = new Report(date, statistic);
                 reports.Add(report);
             }
@@ -152,7 +154,8 @@ namespace CoronaWatchLibrary
                     {
                         StatisticID = jsonObject["CountryCode"].ToString()
                     };
-                    DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                    //DateTime date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                    DateTime date = DateTime.Parse(jsonObject["Date"].ToString(), null, System.Globalization.DateTimeStyles.RoundtripKind);
                     Report report = new Report(date, statistic);
 
                     Region region = new Region(jsonObject["Country"], Region.EnumLevel.Country, jsonObject["Slug"], jsonObject["CountryCode"])
@@ -197,6 +200,7 @@ namespace CoronaWatchLibrary
                 JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
 
                 CoronaWatchContext context = new CoronaWatchContext();
+
                 foreach (JsonObject jsonObject in array)
                 {
                     string ISOCode = jsonObject["CountryCode"].ToString();
@@ -209,7 +213,6 @@ namespace CoronaWatchLibrary
                             Slug = jsonObject["Slug"].ToString()
                         };
                         context.RegionDBs.Add(regionDB);
-                        context.Entry(regionDB).State = EntityState.Added;
                         context.SaveChanges();
                     }
                 }
@@ -250,9 +253,10 @@ namespace CoronaWatchLibrary
 
                 foreach (JsonObject jsonObject in array)
                 {
-                    DateTime APIdate = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                    //DateTime APIdate = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                    DateTime APIdate = DateTime.Parse(jsonObject["Date"].ToString(), null, System.Globalization.DateTimeStyles.RoundtripKind);
                     string CountryName = jsonObject["CountryCode"].ToString();
-                    if (context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == APIdate && r.ISOCode == CountryName).FirstOrDefault() == null)
+                    if (context.ReportDBs.Where(r => r.Date == APIdate && r.ISOCode == CountryName).FirstOrDefault() == null)
                     {
                         ReportDB reportDB = new ReportDB();
                         reportDB.ISOCode = jsonObject["CountryCode"].ToString();
@@ -260,7 +264,7 @@ namespace CoronaWatchLibrary
                         reportDB.Recovered = Convert.ToInt32(jsonObject["TotalRecovered"].ToString());
                         reportDB.Death = Convert.ToInt32(jsonObject["TotalDeaths"].ToString());
                         reportDB.Active = reportDB.Confirmed - reportDB.Recovered - reportDB.Death;
-                        reportDB.Date = Convert.ToDateTime(Regex.Match(jsonObject["Date"].ToString(), @"\d{4}-\d{2}-\d{2}").Value);
+                        reportDB.Date = APIdate;
                         context.ReportDBs.Add(reportDB);
                         context.SaveChanges();
                     }
@@ -292,7 +296,7 @@ namespace CoronaWatchLibrary
             DateTime currentDate = System.DateTime.UtcNow.Date;
             DateTime latestDateOnDB = Convert.ToDateTime(context.ReportDBs.Max(r => r.Date)).Date;
             List<RegionDB> regionDBs = context.RegionDBs.ToList();
-            List<ReportDB> reportDBs = context.ReportDBs.Where(r => DbFunctions.TruncateTime(r.Date) == latestDateOnDB).ToList();
+            List<ReportDB> reportDBs = context.ReportDBs.Where(r => r.Date == latestDateOnDB).ToList();
 
             foreach (RegionDB regionDB in regionDBs)
             {

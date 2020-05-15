@@ -17,7 +17,6 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
         Title="CoronaWatch"
-        FadeContentIfInactive="True"
         MinWidth="1100"
         MinHeight="768" WindowStartupLocation="CenterScreen" Icon="Assets/Images/Favicon.png">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
