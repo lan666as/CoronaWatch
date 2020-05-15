@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoronaWatchLibrary.SocialMedia
+﻿namespace CoronaWatchLibrary.SocialMedia
 {
     class Twitter : ISocialMedia
     {
@@ -18,7 +12,7 @@ namespace CoronaWatchLibrary.SocialMedia
 
         public static void Publish(string Data)
         {
-            System.Diagnostics.Process.Start(API+$"?text={Data}");
+            System.Diagnostics.Process.Start(API + $"?text={Data}");
         }
         void ISocialMedia.Publish(string data)
         {
@@ -27,7 +21,7 @@ namespace CoronaWatchLibrary.SocialMedia
 
         public static Twitter Instance()
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = new Twitter();
             }

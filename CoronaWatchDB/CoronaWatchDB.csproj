@@ -159,6 +159,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoronaWatchContext.cs" />
+    <Compile Include="Migrations\20200515135254_InitialCreate.cs" />
+    <Compile Include="Migrations\20200515135254_InitialCreate.designer.cs">
+      <DependentUpon>20200515135254_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\CoronaWatchContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionDB.cs" />
     <Compile Include="ReportDB.cs" />

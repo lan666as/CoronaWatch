@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CoronaWatchDB;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Text.RegularExpressions;
-using System.Windows;
-using Microsoft.EntityFrameworkCore.Sqlite;
-using CoronaWatchDB;
-using System.Security.Cryptography;
+using System;
+using System.Linq;
 
 namespace Testing
 {
@@ -32,7 +23,7 @@ namespace Testing
                 IRestResponse response = client.Execute(request);
                 var json = SimpleJson.DeserializeObject(response.Content);
                 JObject obj = JObject.Parse(json.ToString());
-                JsonArray array = (JsonArray) SimpleJson.DeserializeObject(obj["Countries"].ToString());
+                JsonArray array = (JsonArray)SimpleJson.DeserializeObject(obj["Countries"].ToString());
 
                 CoronaWatchContext context = new CoronaWatchContext();
 

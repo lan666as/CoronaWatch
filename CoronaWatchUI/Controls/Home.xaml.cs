@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CoronaWatchUI.Controls
 {
@@ -43,23 +33,29 @@ namespace CoronaWatchUI.Controls
                 "velit esse cillum dolore eu fugiat nulla pariatur"
             };
             TextBlock tb = (TextBlock)this.FindName("typewriterTextBlock");
-            Int64 timeToWrite = Convert.ToInt64(((double)String.Join("", toWrite).Length * 10000000.0)*(60.0/350.0));
+            Int64 timeToWrite = Convert.ToInt64(((double)String.Join("", toWrite).Length * 10000000.0) * (60.0 / 350.0));
             Typewriter(toWrite, tb, new TimeSpan(timeToWrite));
         }
         private void Typewriter(List<string> sAnim, TextBlock txt, TimeSpan span)
         {
-            Storyboard story = new Storyboard();
-            story.FillBehavior = FillBehavior.HoldEnd;
-            story.RepeatBehavior = RepeatBehavior.Forever;
+            Storyboard story = new Storyboard
+            {
+                FillBehavior = FillBehavior.HoldEnd,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
 
             DiscreteStringKeyFrame discreteStringKeyFrame;
-            StringAnimationUsingKeyFrames stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames();
-            stringAnimationUsingKeyFrames.Duration = new Duration(span);
+            StringAnimationUsingKeyFrames stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames
+            {
+                Duration = new Duration(span)
+            };
             for (int i = 0; i < 15; i++)
             {
-                discreteStringKeyFrame = new DiscreteStringKeyFrame();
-                discreteStringKeyFrame.KeyTime = KeyTime.Uniform;
-                discreteStringKeyFrame.Value = string.Empty;
+                discreteStringKeyFrame = new DiscreteStringKeyFrame
+                {
+                    KeyTime = KeyTime.Uniform,
+                    Value = string.Empty
+                };
                 stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
             }
             foreach (string s in sAnim)
@@ -67,8 +63,10 @@ namespace CoronaWatchUI.Controls
                 string tmp = string.Empty;
                 foreach (char c in s)
                 {
-                    discreteStringKeyFrame = new DiscreteStringKeyFrame();
-                    discreteStringKeyFrame.KeyTime = KeyTime.Uniform;
+                    discreteStringKeyFrame = new DiscreteStringKeyFrame
+                    {
+                        KeyTime = KeyTime.Uniform
+                    };
                     tmp += c;
                     discreteStringKeyFrame.Value = tmp;
                     stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
@@ -76,22 +74,28 @@ namespace CoronaWatchUI.Controls
                 }
                 for (int i = 0; i < 10; i++)
                 {
-                    discreteStringKeyFrame = new DiscreteStringKeyFrame();
-                    discreteStringKeyFrame.KeyTime = KeyTime.Uniform;
-                    discreteStringKeyFrame.Value = tmp;
+                    discreteStringKeyFrame = new DiscreteStringKeyFrame
+                    {
+                        KeyTime = KeyTime.Uniform,
+                        Value = tmp
+                    };
                     stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
                 }
                 for (int i = 0; i < s.Length; i++)
                 {
-                    discreteStringKeyFrame = new DiscreteStringKeyFrame();
-                    discreteStringKeyFrame.KeyTime = KeyTime.Uniform;
+                    discreteStringKeyFrame = new DiscreteStringKeyFrame
+                    {
+                        KeyTime = KeyTime.Uniform
+                    };
                     tmp = tmp.Remove(tmp.Length - 1, 1);
                     discreteStringKeyFrame.Value = tmp;
                     stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
                 }
-                discreteStringKeyFrame = new DiscreteStringKeyFrame();
-                discreteStringKeyFrame.KeyTime = KeyTime.Uniform;
-                discreteStringKeyFrame.Value = string.Empty;
+                discreteStringKeyFrame = new DiscreteStringKeyFrame
+                {
+                    KeyTime = KeyTime.Uniform,
+                    Value = string.Empty
+                };
                 stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
             }
             Storyboard.SetTargetName(stringAnimationUsingKeyFrames, txt.Name);

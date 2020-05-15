@@ -6,8 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace CoronaWatchUI.Domain
@@ -63,15 +61,14 @@ namespace CoronaWatchUI.Domain
         }
         */
 
-        
+
 
 
         public static ObservableCollection<RegionGridsViewModel> GenerateData()
         {
             CoronaWatchContext context = new CoronaWatchContext();
 
-            context.Database.EnsureCreated();
-            if (!context.ReportDBs.Any())
+            if (context.ReportDBs.Count() == 0)
             {
                 JHUDataService.UpdateDatabase();
             }

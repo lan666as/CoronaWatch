@@ -1,9 +1,5 @@
 namespace CoronaWatchDB
 {
-    using System;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using System.Data.Common;
     using Microsoft.EntityFrameworkCore;
     using System.Reflection;
 
@@ -11,6 +7,7 @@ namespace CoronaWatchDB
     {
         public CoronaWatchContext()
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<RegionDB> RegionDBs { get; set; }

@@ -8,21 +8,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Height="Auto" Width="Auto">
     <Grid>
-        <ComboBox ItemsSource="{Binding Regions}" Height="25" Width="120" Background="White" ScrollViewer.CanContentScroll="True" 
-                  MaxDropDownHeight="120" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,24,22,0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Path=SelectedRegion.Name}" Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                        HorizontalAlignment="Center" Margin="10"
+                           Grid.Row="0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <ComboBox ItemsSource="{Binding Regions}" Height="25" Width="120" Background="White" ScrollViewer.CanContentScroll="True" 
+                  MaxDropDownHeight="120" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5"
                   SelectedItem="{Binding SelectedRegion, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Button x:Name="btn_viewChart" Content="View Chart" Style="{StaticResource MaterialDesignRaisedButton}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,64,22,0" Width="76" FontSize="12" Padding="0,0,0,0" Height="28" Click="btn_viewChart_Click" Command=""/>
-        <TextBlock Text="{Binding Path=SelectedRegion.Name}" Width="200" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Height="30"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="48, 24, 0, 0"/>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button x:Name="btn_viewChart" Content="View Chart" Style="{StaticResource MaterialDesignRaisedButton}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Width="76" FontSize="12" Padding="0,0,0,0" Height="28" Click="btn_viewChart_Click" Command=""/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
         <lvc:CartesianChart x:Name="cht_countryChart" Series="{Binding Series, Mode=TwoWay}" 
-                            LegendLocation="Right" Margin="0,10,50,0">
+                            LegendLocation="Right" Margin="0,10,50,0"
+                            Grid.Row="1">
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Cases" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>

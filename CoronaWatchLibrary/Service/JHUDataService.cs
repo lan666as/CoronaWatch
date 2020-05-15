@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CoronaWatchDB;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Text.RegularExpressions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using CoronaWatchDB;
-using System.Security.Cryptography;
 
 namespace CoronaWatchLibrary
 {
@@ -109,11 +104,11 @@ namespace CoronaWatchLibrary
 
         public static TimeSeries FetchTimeSeriesByRegion(Region region)
         {
-            if(region.TimeSeries != null)
+            if (region.TimeSeries != null)
             {
                 return region.TimeSeries;
             }
-            var client = new RestClient(API+ "/country/"+region.Slug)
+            var client = new RestClient(API + "/country/" + region.Slug)
             {
                 Timeout = -1
             };
@@ -178,7 +173,7 @@ namespace CoronaWatchLibrary
                     MessageBox.Show(e.Message, "Error");
                     return null;
                 }
-                
+
             }
 
         }
@@ -258,11 +253,13 @@ namespace CoronaWatchLibrary
                     string CountryName = jsonObject["CountryCode"].ToString();
                     if (context.ReportDBs.Where(r => r.Date == APIdate && r.ISOCode == CountryName).FirstOrDefault() == null)
                     {
-                        ReportDB reportDB = new ReportDB();
-                        reportDB.ISOCode = jsonObject["CountryCode"].ToString();
-                        reportDB.Confirmed = Convert.ToInt32(jsonObject["TotalConfirmed"].ToString());
-                        reportDB.Recovered = Convert.ToInt32(jsonObject["TotalRecovered"].ToString());
-                        reportDB.Death = Convert.ToInt32(jsonObject["TotalDeaths"].ToString());
+                        ReportDB reportDB = new ReportDB
+                        {
+                            ISOCode = jsonObject["CountryCode"].ToString(),
+                            Confirmed = Convert.ToInt32(jsonObject["TotalConfirmed"].ToString()),
+                            Recovered = Convert.ToInt32(jsonObject["TotalRecovered"].ToString()),
+                            Death = Convert.ToInt32(jsonObject["TotalDeaths"].ToString())
+                        };
                         reportDB.Active = reportDB.Confirmed - reportDB.Recovered - reportDB.Death;
                         reportDB.Date = APIdate;
                         context.ReportDBs.Add(reportDB);
@@ -296,11 +293,11 @@ namespace CoronaWatchLibrary
             DateTime currentDate = System.DateTime.UtcNow.Date;
             DateTime latestDateOnDB = Convert.ToDateTime(context.ReportDBs.Max(r => r.Date)).Date;
             List<RegionDB> regionDBs = context.RegionDBs.ToList();
-            List<ReportDB> reportDBs = context.ReportDBs.Where(r => r.Date == latestDateOnDB).ToList();
+            List<ReportDB> reportDBs = context.ReportDBs.ToList();
 
             foreach (RegionDB regionDB in regionDBs)
             {
-                ReportDB reportDB = reportDBs.Where(r => r.ISOCode == regionDB.ISOCode).FirstOrDefault();
+                ReportDB reportDB = reportDBs.Where(r => r.ISOCode == regionDB.ISOCode).OrderByDescending(r => r.Date).Select(r => r).FirstOrDefault();
                 Statistic statistic = new Statistic((int)reportDB.Confirmed, (int)reportDB.Recovered, (int)reportDB.Death)
                 {
                     StatisticID = reportDB.ISOCode

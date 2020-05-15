@@ -1,16 +1,12 @@
 ﻿using CoronaWatchDB;
 using CoronaWatchLibrary;
 using LiveCharts;
-using LiveCharts.Defaults;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoronaWatchUI.Domain
 {
@@ -23,7 +19,7 @@ namespace CoronaWatchUI.Domain
 
         public CoronaChartViewModel()
         {
-            _selectedRegion = new Region{ Name="Indonesia", Slug = "indonesia", ISOCode="ID"}; // Default value for chart
+            _selectedRegion = new Region { Name = "Indonesia", Slug = "indonesia", ISOCode = "ID" }; // Default value for chart
             _series = GenerateData(_selectedRegion);
             _regions = GetRegion();
             YFormatter = value => value.ToString();
@@ -31,7 +27,7 @@ namespace CoronaWatchUI.Domain
 
         private SeriesCollection GenerateData(Region region)
         {
-            
+
             TimeSeries timeSeries = JHUDataService.FetchTimeSeriesByRegion(region);
 
             Labels = timeSeries.DateSeries.Select(i => i.ToString()).ToArray();
@@ -62,11 +58,11 @@ namespace CoronaWatchUI.Domain
         }
         private List<Region> GetRegion()
         {
-            using(CoronaWatchContext context = new CoronaWatchContext())
+            using (CoronaWatchContext context = new CoronaWatchContext())
             {
                 List<Region> regions = new List<Region>();
                 List<RegionDB> regionDBs = context.RegionDBs.ToList();
-                foreach(RegionDB regionDB in regionDBs)
+                foreach (RegionDB regionDB in regionDBs)
                 {
                     Region region = new Region()
                     {
@@ -112,10 +108,7 @@ namespace CoronaWatchUI.Domain
         }
         private void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
