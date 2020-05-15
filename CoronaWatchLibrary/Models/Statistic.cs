@@ -24,5 +24,12 @@
             this.DeathCases = death;
             this.ActiveCases = this.ConfirmedCases - this.DeathCases - this.RecoveredCases;
         }
+        public Statistic(int confirmed, int recovered, int death, int active)
+        {
+            this.ConfirmedCases = confirmed;
+            this.RecoveredCases = recovered;
+            this.DeathCases = death;
+            this.ActiveCases = active;
+        }
     }
 }
